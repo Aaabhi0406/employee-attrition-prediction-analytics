@@ -1,5 +1,4 @@
-# employee-attrition-prediction-analytics
-End-to-end Employee Attrition Analytics &amp; Prediction project using Python, Machine Learning and Power BI.
+
 # Employee Attrition Prediction & Analytics
 
 An end-to-end **Data Science, Machine Learning, and Business Intelligence project** designed to analyze employee attrition, identify major attrition drivers, predict employees at risk of leaving, and present actionable HR insights through an interactive Power BI dashboard.
