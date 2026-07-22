@@ -1,69 +1,91 @@
-
 # Employee Attrition Prediction & Analytics
 
-An end-to-end **Data Science, Machine Learning, and Business Intelligence project** designed to analyze employee attrition, identify major attrition drivers, predict employees at risk of leaving, and present actionable HR insights through an interactive Power BI dashboard.
+An end-to-end **Data Science, Machine Learning, and Business Intelligence project** that analyzes employee attrition, identifies key attrition drivers, predicts employees at risk of leaving, and presents actionable HR insights through an interactive Power BI dashboard.
 
-The project combines **Python, exploratory data analysis, machine learning, predictive analytics, and Power BI** to demonstrate a complete data science workflow from raw HR data to business decision support.
+The project demonstrates the complete journey from **raw HR data → machine learning → business intelligence → HR recommendations**.
 
 ---
 
 ## Project Overview
 
-Employee attrition is a major challenge for organizations because employee turnover can increase recruitment costs, reduce productivity, and result in the loss of experienced talent.
+Employee attrition can create significant recruitment costs, productivity loss, and loss of organizational knowledge.
 
-The objective of this project is to answer three major business questions:
+This project was developed to answer three major questions:
 
-1. **What patterns are associated with employee attrition?**
-2. **Which employees have a higher predicted risk of leaving?**
-3. **What actions can HR teams take to improve employee retention?**
+1. **What factors are associated with employee attrition?**
+2. **Which employees have a higher predicted probability of leaving?**
+3. **How can predictive analytics support proactive HR retention strategies?**
 
-To address these questions, the project follows an end-to-end analytics pipeline:
+The project combines:
 
-**Raw HR Data → Data Cleaning → Exploratory Data Analysis → Feature Preparation → Machine Learning → Attrition Probability → Risk Segmentation → Power BI Dashboard → Business Recommendations**
-
----
-
-## Business Objectives
-
-The project aims to:
-
-- Analyze overall employee attrition patterns.
-- Identify departments and job roles with higher attrition.
-- Study the relationship between attrition and factors such as:
-  - Monthly income
-  - Employee tenure
-  - Overtime
-  - Job satisfaction
-  - Work-life balance
-- Build a machine learning model to estimate employee attrition risk.
-- Generate employee-level attrition probabilities.
-- Categorize employees into risk groups.
-- Develop an interactive Power BI dashboard for HR decision-making.
-- Translate analytical findings into actionable retention recommendations.
+- Python-based data analysis
+- Data preprocessing
+- Exploratory Data Analysis
+- Imbalanced classification
+- Machine Learning model comparison
+- Probability-based risk prediction
+- Employee risk segmentation
+- Power BI visualization
+- Business insight generation
 
 ---
 
-## Dataset
+# End-to-End Project Pipeline
+
+```text
+Business Understanding
+        ↓
+Data Collection & Loading
+        ↓
+Data Quality Analysis
+        ↓
+Exploratory Data Analysis
+        ↓
+Data Preprocessing
+        ↓
+Train/Test Split
+        ↓
+Machine Learning Model Comparison
+        ↓
+Class-Imbalance Handling
+        ↓
+Model Evaluation
+        ↓
+Final Model Selection
+        ↓
+Attrition Probability Prediction
+        ↓
+Employee Risk Segmentation
+        ↓
+Dashboard Dataset Generation
+        ↓
+Power BI Dashboard
+        ↓
+Business Insights & HR Recommendations
+```
+
+---
+
+# Dataset
 
 The project uses the **IBM HR Analytics Employee Attrition dataset**.
 
-The dataset contains employee-level information covering demographic, compensation, job, satisfaction, and employment-related characteristics.
+The dataset contains employee-level demographic, employment, compensation, satisfaction, and workplace information.
 
-Examples of features include:
+Example features include:
 
 - Age
 - Department
 - Job Role
 - Monthly Income
 - OverTime
-- Job Satisfaction
-- Work-Life Balance
 - Years At Company
 - Total Working Years
-- Job Level
+- Job Satisfaction
+- Work-Life Balance
 - Environment Satisfaction
 - Relationship Satisfaction
-- Training Times Last Year
+- Job Level
 - Business Travel
 - Marital Status
 - Stock Option Level
@@ -72,113 +94,110 @@ Examples of features include:
 
 `Attrition`
 
-- `Yes` → Employee left the organization
-- `No` → Employee remained with the organization
+- `Yes` → Employee left
+- `No` → Employee remained
 
-This makes the machine learning task a **binary classification problem**.
-
----
-
-# Project Workflow
-
-## 1. Business Understanding
-
-The first stage focused on defining the HR problem and identifying the analytical questions that the project should answer.
-
-Key questions included:
-
-- What is the overall employee attrition rate?
-- Which departments experience the most attrition?
-- Does overtime relate to higher attrition?
-- Does employee income relate to attrition?
-- Are employees in their early years at the organization more likely to leave?
-- How are job satisfaction and work-life balance associated with attrition?
-- Can machine learning identify employees with elevated attrition risk?
+Therefore, the machine-learning task was formulated as a **binary classification problem**.
 
 ---
 
-## 2. Data Loading and Inspection
+# The Class-Imbalance Problem
 
-The dataset was loaded and inspected using Python.
+One of the most important challenges in this project was **class imbalance**.
 
-Initial analysis included:
+The majority of employees belonged to:
 
-- Dataset dimensions
-- Data types
-- Missing-value inspection
-- Duplicate inspection
-- Target-variable distribution
-- Numerical and categorical feature identification
-- Basic descriptive statistics
+`Attrition = No`
 
-This stage helped establish the quality and structure of the dataset before modeling.
+while substantially fewer employees belonged to:
 
----
+`Attrition = Yes`.
 
-## 3. Data Preprocessing
+This means that **accuracy alone can be misleading**.
 
-The preprocessing pipeline prepared the HR data for machine learning.
+A model can achieve high accuracy by correctly predicting the majority class while failing to detect employees who actually leave.
 
-Major preprocessing activities included:
+Therefore, model evaluation considered:
 
-- Removing irrelevant or non-informative columns where appropriate
-- Separating features and target variable
-- Encoding categorical variables
-- Preparing numerical features
-- Creating training and testing datasets
-- Ensuring transformations were applied consistently
-
-Special attention was given to the **class imbalance** in the Attrition target because considerably fewer employees belong to the Attrition = Yes class.
-
-This is important because relying only on accuracy can produce misleading results for an imbalanced classification problem.
-
----
-
-# Machine Learning Pipeline
-
-The machine learning stage was designed to predict whether an employee is likely to leave the organization.
-
-The overall modeling workflow was:
-
-**Data Preparation → Train/Test Split → Preprocessing → Model Training → Model Evaluation → Probability Prediction → Risk Classification**
-
----
-
-## Model Evaluation
-
-The model was evaluated using classification metrics rather than relying only on accuracy.
-
-Evaluation considerations included:
-
+- Accuracy
 - Precision
 - Recall
 - F1-score
 - Confusion Matrix
 - ROC-AUC
 
-### ROC-AUC
+Particular attention was given to **Recall for the Attrition = Yes class**.
 
-The final model achieved an ROC-AUC score of approximately:
+---
 
-**0.76**
+# Machine Learning Model Comparison
 
-ROC-AUC was particularly useful because the target variable is imbalanced and the project focuses on the model's ability to distinguish between employees with relatively higher and lower attrition risk.
+Four classification approaches were evaluated.
 
-The model should be interpreted as a **decision-support model**, not as a system for making automated employment decisions.
+| Model | Accuracy | Attrition Precision | Attrition Recall | Attrition F1 |
+|---|---:|---:|---:|---:|
+| Logistic Regression | 88% | 0.87 | 0.28 | 0.42 |
+| **Balanced Logistic Regression** | **70%** | **0.30** | **0.66** | **0.41** |
+| Decision Tree | 83% | 0.44 | 0.17 | 0.25 |
+| Random Forest | 84% | 0.44 | 0.09 | 0.14 |
+
+---
+
+## Why wasn't the highest-accuracy model selected?
+
+Standard Logistic Regression achieved approximately **88% accuracy**, compared with approximately **70%** for Balanced Logistic Regression.
+
+Looking only at accuracy would therefore suggest that standard Logistic Regression was superior.
+
+However:
+
+**Standard Logistic Regression Attrition Recall: ~28%**
+
+vs.
+
+**Balanced Logistic Regression Attrition Recall: ~66%**
+
+Balanced Logistic Regression identified **31 of the 47 actual attrition cases** in the evaluated test data.
+
+For an employee attrition early-warning use case, detecting a larger proportion of the minority attrition class was considered more important than maximizing overall accuracy.
+
+Therefore, **Balanced Logistic Regression was selected as the final model**.
+
+> **Key ML lesson:** The best model is not necessarily the model with the highest accuracy. Model selection should reflect the business objective and the cost of different prediction errors.
+
+For the complete experiment and selection reasoning, see:
+
+**[Machine Learning Model Comparison](MODEL_COMPARISON.md)**
+
+---
+
+# Final Model
+
+### Balanced Logistic Regression
+
+The final model achieved approximately:
+
+| Metric | Result |
+|---|---:|
+| Accuracy | ~70% |
+| Attrition Recall | ~66% |
+| Attrition Precision | ~30% |
+| Attrition F1 | ~41% |
+| ROC-AUC | ~0.76 |
+
+The model was used as a **risk-ranking and decision-support tool**, rather than as an automated employment decision system.
 
 ---
 
 # Attrition Probability
 
-Instead of using only binary predictions, the model generates an:
+Rather than generating only Yes/No predictions, the final pipeline calculates an:
 
 `Attrition_Probability`
 
 for each employee.
 
-This provides more useful information than a simple Yes/No prediction because HR teams can understand the relative level of predicted risk.
-
-For example:
+Example:
 
 | Employee | Attrition Probability |
 |---|---:|
@@ -186,37 +205,47 @@ For example:
 | Employee B | 0.72 |
 | Employee C | 0.21 |
 
-Higher probabilities indicate higher model-estimated attrition risk.
+This makes the output more useful because employees can be ranked according to their model-estimated attrition risk.
 
 ---
 
-# Risk Segmentation
+# Employee Risk Segmentation
 
-Employees were categorized into risk groups using their predicted attrition probabilities.
-
-The dashboard uses risk categories such as:
+Predicted probabilities were converted into interpretable risk categories:
 
 - **Low Risk**
 - **Medium Risk**
 - **High Risk**
 
-This allows HR teams to move from individual probability values to easily interpretable employee risk segments.
+The final prediction dataset therefore contains both:
+
+`Attrition_Probability`
+
+and:
+
+`Risk_Category`
+
+These outputs were subsequently integrated into Power BI.
 
 ---
 
 # Power BI Dashboard
 
-The final analytical output is an interactive **three-page Power BI dashboard**.
+The final solution contains a **three-page interactive Power BI dashboard**.
 
-The dashboard connects descriptive HR analytics with machine learning predictions.
+Each page answers a different business question.
 
 ---
 
 ## Page 1 — HR Attrition Analytics Dashboard
 
-The Executive Dashboard provides a high-level overview of workforce attrition.
+### Question:
 
-### Key KPIs
+**What is happening across the workforce?**
+
+The executive dashboard provides an overview of employee attrition.
+
+### KPIs
 
 - Total Employees: **1.47K**
 - Attrition Rate: **16.12%**
@@ -224,9 +253,7 @@ The Executive Dashboard provides a high-level overview of workforce attrition.
 - Average Years at Company: **7.01**
 - Average Monthly Income: **6.50K**
 
-### Visual Analysis
-
-The dashboard analyzes:
+### Analysis
 
 - Employee Attrition by Department
 - Employee Attrition by Overtime
@@ -235,7 +262,7 @@ The dashboard analyzes:
 - Employee Risk Distribution
 - Predicted Employee Attrition
 
-Interactive slicers allow users to filter results by:
+Interactive slicers:
 
 - Department
 - Gender
@@ -245,171 +272,163 @@ Interactive slicers allow users to filter results by:
 
 ## Page 2 — ML Attrition Prediction & Risk
 
-The second dashboard page focuses specifically on machine-learning predictions and employee risk.
+### Question:
+
+**Who is predicted to be at higher risk?**
+
+This page connects the machine-learning model directly with business analysis.
 
 ### ML KPIs
 
 - Predicted Leavers
-- High Risk Employees
+- High-Risk Employees
 - Average Attrition Probability
 - Model ROC-AUC Score
 
-### Risk Analysis
-
-The page includes:
+### Visualizations
 
 - Predicted Leavers by Department
 - Average Attrition Risk by Job Role
 - High-Risk Employee Profiles
 
-The employee-level risk table includes information such as:
+The employee risk table contains:
 
 - Department
 - Job Role
 - Age
 - OverTime
 - Monthly Income
-- Years at Company
+- Years At Company
 - Attrition Probability
 - Predicted Attrition
 
-Conditional formatting is used to make high attrition probabilities easier to identify.
+Conditional formatting highlights employees with high predicted attrition probabilities.
 
-Interactive filters include:
+Interactive slicers:
 
 - Department
 - Job Role
 - OverTime
 
-A **Reset Filters** button is included to restore the default dashboard state.
+A **Reset Filters** button restores the default dashboard state.
 
 ---
 
 ## Page 3 — Attrition Drivers & Business Insights
 
-The third page focuses on understanding factors associated with employee attrition.
+### Question:
 
-It analyzes:
+**What workforce factors are associated with attrition?**
+
+This page analyzes:
 
 - Attrition Rate by Monthly Income
 - Attrition Rate by Tenure Band
 - Attrition Rate by Job Satisfaction
 - Attrition Rate by Work-Life Balance
 
+It also translates analytical findings into HR recommendations.
+
 ---
 
 # Key Business Insights
 
-## 1. Lower-income employees show higher attrition
+### 1. Monthly Income
 
-Employees earning below 3K showed an attrition rate of approximately:
+Employees earning below 3K showed approximately:
 
-**28.61%**
+**28.61% attrition**
 
-This was the highest attrition rate among the analyzed income groups.
+This was the highest attrition rate among the analyzed income bands.
 
----
+### 2. Employee Tenure
 
-## 2. Early-tenure employees represent a major retention risk
+Employees with less than two years of tenure showed approximately:
 
-Employees with less than two years of tenure showed an attrition rate of approximately:
+**34.88% attrition**
 
-**34.88%**
+This highlights early employee tenure as an important retention period.
 
-This suggests that the early stages of the employee lifecycle deserve particular attention in retention strategies.
+### 3. Job Satisfaction
 
----
-
-## 3. Job satisfaction is associated with employee retention
-
-Employees with the lowest job satisfaction level showed approximately:
+Employees with the lowest job-satisfaction level showed approximately:
 
 **22.84% attrition**
 
-Employees with the highest job satisfaction level showed approximately:
+compared with approximately:
 
-**11.33% attrition**
+**11.33%**
 
-This indicates an association between lower job satisfaction and higher employee turnover.
+for employees with the highest satisfaction level.
 
----
-
-## 4. Work-life balance is an important attrition indicator
+### 4. Work-Life Balance
 
 Employees reporting the lowest work-life balance level showed approximately:
 
 **31.25% attrition**
 
-This was considerably higher than several other work-life balance groups.
+indicating an association between poor work-life balance and employee turnover.
 
----
+### 5. Overtime
 
-## 5. Overtime is associated with substantially higher attrition
+Employees working overtime showed approximately:
 
-Employees working overtime showed an attrition rate of approximately:
-
-**30.53%**
+**30.53% attrition**
 
 compared with approximately:
 
 **10.44%**
 
-for employees who were not working overtime.
-
-This makes overtime an important factor for HR teams to monitor.
+among employees who were not working overtime.
 
 ---
 
 # HR Recommendations
 
-Based on the analytical findings, organizations could consider the following actions:
+Based on the analysis, organizations could consider:
 
-### 1. Review compensation for lower-income employees
+### Compensation
 
-Evaluate compensation competitiveness, benefits, and career-growth opportunities for employees in lower salary bands.
+Review compensation, benefits, and career-growth opportunities for lower-income employees.
 
-### 2. Strengthen early employee retention
+### Early-Tenure Retention
 
-Introduce stronger:
+Strengthen:
 
-- Onboarding programs
+- Onboarding
 - Mentorship
 - Career planning
 - Manager check-ins
-- Early employee engagement initiatives
+- Employee engagement
 
-particularly during the first two years of employment.
+particularly during the first two years.
 
-### 3. Monitor employee satisfaction
+### Employee Satisfaction
 
-Conduct regular employee-satisfaction surveys and targeted manager conversations to identify dissatisfaction earlier.
+Conduct regular satisfaction surveys and targeted manager conversations to identify dissatisfaction earlier.
 
-### 4. Improve work-life balance
+### Work-Life Balance
 
-Organizations should monitor excessive workload and consider initiatives such as:
+Monitor workload and consider:
 
-- Better workload distribution
 - Flexible working arrangements
+- Better workload distribution
 - Employee well-being programs
 - Improved leave management
 
-### 5. Monitor overtime
+### Overtime Monitoring
 
-Employees consistently working overtime may require workload reviews and additional management attention.
+Identify employees experiencing sustained overtime and investigate workload or staffing issues.
 
-### 6. Use ML predictions as an early-warning tool
+### Predictive Risk Monitoring
 
-Machine-learning risk scores can help prioritize employees for proactive retention analysis.
-
-However, these predictions should **not be used as automated employment decisions**.
-
-Human judgment and organizational context remain essential.
+Use machine-learning risk scores as an **early-warning signal** to prioritize further HR analysis and employee engagement.
 
 ---
 
 # Technology Stack
 
-### Programming & Data Analysis
+### Data Science
 
 - Python
 - Pandas
@@ -419,21 +438,24 @@ Human judgment and organizational context remain essential.
 ### Machine Learning
 
 - Scikit-learn
-- Classification Modeling
-- Feature Preprocessing
+- Logistic Regression
+- Balanced Logistic Regression
+- Decision Tree
+- Random Forest
+- Classification Metrics
+- ROC-AUC
 - Probability Prediction
-- ROC-AUC Evaluation
 
-### Data Visualization & Business Intelligence
+### Business Intelligence
 
 - Power BI
 - DAX
-- Interactive Slicers
 - KPI Cards
+- Interactive Slicers
 - Conditional Formatting
 - Business Insight Visualization
 
-### Development & Version Control
+### Development
 
 - Visual Studio Code
 - Git
@@ -453,7 +475,7 @@ employee-attrition-prediction-analytics/
 │   └── Employee_Attrition_With_Predictions.csv
 │
 ├── dashboard_screenshot/
-│   └── Dashboard screenshots
+│   └── Power BI dashboard screenshots
 │
 ├── data/
 │   ├── raw/
@@ -470,60 +492,38 @@ employee-attrition-prediction-analytics/
 │   └── 04_Dashboard_Dataset.ipynb
 │
 ├── reports/
-│
 ├── src/
 │
 ├── .gitignore
+├── LICENSE
+├── MODEL_COMPARISON.md
 ├── README.md
-├── requirements.txt
-└── LICENSE
+└── requirements.txt
 ```
-
----
-
-# Dashboard Story
-
-The three dashboard pages are intentionally designed to answer different business questions:
-
-### Page 1 — What is happening?
-
-Provides an executive overview of employee attrition.
-
-### Page 2 — Who is at risk?
-
-Uses machine-learning predictions to identify employees and workforce groups with elevated predicted attrition risk.
-
-### Page 3 — What factors are associated with attrition?
-
-Analyzes major workforce characteristics associated with higher employee attrition and translates them into HR recommendations.
-
-Together, these pages create the following analytical flow:
-
-**Descriptive Analytics → Predictive Analytics → Business Recommendations**
 
 ---
 
 # How to Run the Project
 
-## 1. Clone the repository
+### 1. Clone the repository
 
 ```bash
 git clone <repository-url>
 ```
 
-## 2. Navigate to the project
+### 2. Enter the project directory
 
 ```bash
 cd employee-attrition-prediction-analytics
 ```
 
-## 3. Install dependencies
+### 3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 4. Open Jupyter Notebook
+### 4. Launch Jupyter
 
 ```bash
 jupyter notebook
@@ -531,51 +531,83 @@ jupyter notebook
 
 Run the notebooks in numerical order.
 
-## 5. Open the Power BI dashboard
+### 5. Open the dashboard
 
-Open the `.pbix` file available inside the `dashboard/` directory using Power BI Desktop.
+Open the `.pbix` file inside the `dashboard/` directory using Power BI Desktop.
 
 ---
 
-# Project Limitations
+# Responsible ML & Limitations
 
-This project has several important limitations:
+This project should be interpreted carefully.
 
 - The dataset is relatively small.
-- The dataset represents a specific HR analytics scenario and may not generalize to every organization.
-- Attrition is an imbalanced classification problem.
-- Relationships identified through dashboard analysis represent **associations and not necessarily causal relationships**.
-- Employee behavior can be influenced by factors not included in the dataset.
-- Model predictions should not be used independently for employment-related decisions.
+- Employee attrition is an imbalanced classification problem.
+- Relationships identified through analysis represent **associations, not proof of causation**.
+- Model performance on this dataset does not guarantee performance in another organization.
+- Employee behavior can depend on factors not represented in the dataset.
+- False positives and false negatives remain present in the model.
+- Predicted attrition probability does **not** mean an employee will definitely leave.
+
+The ML system is intended as a **decision-support and analytical tool**.
+
+It should not be used independently to make hiring, firing, promotion, compensation, or other employment decisions.
 
 ---
 
 # Future Improvements
 
-Future versions of the project could include:
+Potential improvements include:
 
 - Hyperparameter optimization
-- Additional classification algorithms
-- Advanced class-imbalance techniques
-- SHAP-based model explainability
-- Feature-importance dashboard
-- Model threshold optimization
-- Automated ML prediction pipeline
-- Deployment through a web application or API
-- Integration with live HR databases
-- Model monitoring and drift detection
+- Cross-validation-based model comparison
+- Classification threshold optimization
+- Additional imbalance-handling techniques
+- SHAP-based explainability
+- Feature importance analysis
+- Automated prediction pipeline
+- Web/API deployment
+- Integration with live HR systems
+- Model monitoring
+- Data and concept drift detection
+
+---
+
+# Key Learning
+
+The most important technical lesson from this project was understanding that:
+
+> **High accuracy does not necessarily mean a useful model.**
+
+Standard Logistic Regression achieved approximately **88% accuracy** but detected only around **28% of the Attrition class**.
+
+Balanced Logistic Regression reduced overall accuracy to approximately **70%**, but increased Attrition recall to approximately **66%**.
+
+This demonstrated the importance of selecting evaluation metrics based on the **actual business problem rather than a single headline metric**.
 
 ---
 
 # Conclusion
 
-This project demonstrates an end-to-end data science workflow for employee attrition analysis.
+This project demonstrates an end-to-end Data Science and Business Intelligence workflow:
 
-It combines:
+**Business Understanding → Data Analysis → Preprocessing → Machine Learning → Model Comparison → Risk Prediction → Power BI → Business Recommendations**
 
-**Business Understanding → Data Preparation → Machine Learning → Predictive Risk Analysis → Power BI → Business Recommendations**
+The final solution combines descriptive and predictive analytics to demonstrate how machine learning can be translated into interpretable business insights.
 
-The project shows how machine learning predictions can be combined with business intelligence tools to transform HR data into interpretable insights that can support proactive employee-retention strategies.
+---
+
+# License & Usage
+
+**Copyright © 2026 Abhinav Mohurle. All Rights Reserved.**
+
+This repository is publicly available for **portfolio viewing and evaluation purposes only**.
+
+No permission is granted to copy, reproduce, modify, redistribute, republish, sublicense, sell, or reuse this project's original source code, notebooks, machine-learning workflows, trained model artifacts, dashboard designs, documentation, or other original project materials without prior written permission from the copyright holder.
+
+Third-party datasets, libraries, frameworks, and other external materials remain subject to their respective licenses and terms.
+
+For complete terms, see the **[LICENSE](LICENSE)** file.
 
 ---
 
@@ -583,4 +615,4 @@ The project shows how machine learning predictions can be combined with business
 
 **Abhinav Mohurle**
 
-Data Science | Machine Learning | AI | Analytics
+Data Science | Machine Learning | Artificial Intelligence | Business Analytics
